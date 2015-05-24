@@ -447,7 +447,7 @@ public class ContextLoader {
 		if (env instanceof ConfigurableWebEnvironment) {
 			((ConfigurableWebEnvironment) env).initPropertySources(sc, null);
 		}
-
+                // 完成资源文件的加载、配置文件解析、Bean定义的注册、组件的初始化等核心工作
 		customizeContext(sc, wac);
 		wac.refresh();
 	}
