@@ -374,11 +374,13 @@ public class ContextLoader {
 	 * @see ConfigurableWebApplicationContext
 	 */
 	protected WebApplicationContext createWebApplicationContext(ServletContext sc) {
+		//获取当前Servlet上下文接口的实现类
 		Class<?> contextClass = determineContextClass(sc);
 		if (!ConfigurableWebApplicationContext.class.isAssignableFrom(contextClass)) {
 			throw new ApplicationContextException("Custom context class [" + contextClass.getName() +
 					"] is not of type [" + ConfigurableWebApplicationContext.class.getName() + "]");
 		}
+		//使用JDK反射机制，调用Servlet上下文实现类的无参构造方法创建实例对象 
 		return (ConfigurableWebApplicationContext) BeanUtils.instantiateClass(contextClass);
 	}
 
@@ -432,7 +434,9 @@ public class ContextLoader {
 		//从web.xml中读取配置文件的contextConfigLocation属性值，比如：classpath:spring/applicationContext.xml
 		String configLocationParam = sc.getInitParameter(CONFIG_LOCATION_PARAM);
 		if (configLocationParam != null) {
-			//获取configLocation的配置     
+			//获取configLocation的配置
+			// setConfigLocation()-->XmlWebApplicationContext-->AbstractRefreshableWebApplicationContext
+			// -->AbstractRefreshableConfigApplicationContext-->
 			wac.setConfigLocation(configLocationParam);
 		}
 
