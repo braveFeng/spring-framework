@@ -432,6 +432,7 @@ public class ContextLoader {
 		//从web.xml中读取配置文件的contextConfigLocation属性值，比如：classpath:spring/applicationContext.xml
 		String configLocationParam = sc.getInitParameter(CONFIG_LOCATION_PARAM);
 		if (configLocationParam != null) {
+			//获取configLocation的配置     
 			wac.setConfigLocation(configLocationParam);
 		}
 
